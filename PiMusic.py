@@ -1,0 +1,54 @@
+import pygame
+import random
+import math
+import sys
+from pygame.locals import *
+queue = 0
+pygame.init()
+def song(required):
+    start = 1
+    while start == 1:
+        try:
+            song = input("Which song would you like to play?")
+            pygame.mixer.music.load(song)
+            pygame.mixer.music.play(0)
+            start = 0
+            break
+        except (KeyboardInterrupt,pygame.error):
+            if required == False:
+                start = 0
+
+song(True)
+
+
+
+pygame.display.set_caption('PiMusic')
+screen = pygame.display.set_mode((426, 240))
+font = pygame.font.SysFont(None, 36)
+screen.fill((255, 255, 255))
+
+def draw_text(display_string, font, surface, x_pos, y_pos):
+    text_display = font.render(display_string, 1, (0, 0, 0))
+    surface.blit(text_display, (x_pos, y_pos))
+
+main_clock = pygame.time.Clock()
+
+while True:
+    # check for events
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == MOUSEBUTTONDOWN:
+            song(False)
+
+
+    if queue == 1:
+        pygame.mixer.music.queue(song)
+        queue = 0
+    main_clock.tick(60)
+    draw_text("Click to switch song.",font,screen,0,100)
+    pygame.display.update()
+
+
+
