@@ -14,8 +14,8 @@ def song(required):
             while wav != "yes" or "no":
                 wav = input("Are you using a wav file?")
                 if wav == "yes":
-                    pygame.mixer.sound.load(song)
-                    pygame.mixer.sound.play(0)
+                    wav2 = pygame.mixer.Sound(song)
+                    pygame.mixer.Sound.play(wav2,0)
                     start = 0
                     break
                 if wav == "no":
