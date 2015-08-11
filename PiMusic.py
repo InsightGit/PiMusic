@@ -50,11 +50,13 @@ while True:
             sys.exit()
         if event.type == MOUSEBUTTONDOWN:
             song(False)
+        if event.type == KEYDOWN:
+            if event.key == K_q or event.key == K_ESCAPE:
+                pygame.quit()
+                sys.exit()
 
 
-    if queue == 1:
-        pygame.mixer.music.queue(song)
-        queue = 0
+
     main_clock.tick(60)
     draw_text("Click to switch song.",font,screen,0,100)
     pygame.display.update()
