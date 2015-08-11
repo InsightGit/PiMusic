@@ -9,16 +9,25 @@ def song(required):
     start = 1
     while start == 1:
         try:
+            wav = None
             song = input("Which song would you like to play?")
-            pygame.mixer.music.load(song)
-            pygame.mixer.music.play(0)
-            start = 0
-            break
+            while wav != "yes" or "no":
+                wav = input("Are you using a wav file?")
+                if wav == "yes":
+                    pygame.mixer.sound.load(song)
+                    pygame.mixer.sound.play(0)
+                    start = 0
+                    break
+                if wav == "no":
+                    pygame.mixer.music.load(song)
+                    pygame.mixer.music.play(0)
+                    start = 0
+                    break
         except (KeyboardInterrupt,pygame.error):
             if required == False:
                 start = 0
 
-song(True)
+song(False)
 
 
 
