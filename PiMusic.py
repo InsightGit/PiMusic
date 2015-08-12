@@ -15,12 +15,12 @@ def song(required):
                 wav = input("Are you using a wav file?")
                 if wav == "yes":
                     wav2 = pygame.mixer.Sound(song)
-                    pygame.mixer.Sound.play(wav2,0)
+                    pygame.mixer.Sound.play(wav2,-1)
                     start = 0
                     break
                 if wav == "no":
                     pygame.mixer.music.load(song)
-                    pygame.mixer.music.play(0)
+                    pygame.mixer.music.play(-1)
                     start = 0
                     break
         except (KeyboardInterrupt,pygame.error):
@@ -30,11 +30,14 @@ def song(required):
 song(False)
 
 
-
-pygame.display.set_caption('PiMusic')
-screen = pygame.display.set_mode((426, 240))
-font = pygame.font.SysFont(None, 36)
-screen.fill((255, 255, 255))
+try:
+    pygame.display.set_caption('PiMusic')
+    screen = pygame.display.set_mode((426, 240))
+    font = pygame.font.SysFont(None, 36)
+    screen.fill((255, 255, 255))
+except pygame.error:
+    print("You seem not to have X open.")
+    sys.exit
 
 def draw_text(display_string, font, surface, x_pos, y_pos):
     text_display = font.render(display_string, 1, (0, 0, 0))
